@@ -58,8 +58,8 @@
                     </div>
                     
                     <div class="form-group">
-                        <button v-if="status" type="submit" class="btn btn-success">Add New Task</button>                                             
-                        <button v-else  type="click" @click.prevent="updateTodo" class="btn btn-info ml-5">Update</button>
+                        <button v-if="status" type="submit" class="btn btn-dark">Add New Task</button>                                             
+                        <button v-if="secondStatus"  type="click" @click.prevent="updateTodo" class="btn btn-info ml-5">Update</button>
                         <button type="reset" class="btn btn-danger ml-3" @click="back">Reset</button>                                           
                     </div> 
 
@@ -89,8 +89,8 @@
                             <td>{{todo.frequency}}</td>
                             <td>{{todo.status}}</td>
                             <td>
-                                <button class="btn btn-info" @click="removeItem(index)">Delete</button>
-                                <button class="btn btn-danger ml-3" @click="updateItem(todo)">Edit</button>
+                                <button class="btn btn-dark" @click="removeItem(index)">Delete</button>
+                                <button class="btn btn-secondary ml-3" @click="updateItem(todo)">Edit</button>
                                
                             </td>                            
                           </tr>                                                    
@@ -116,6 +116,7 @@ export default {
     data(){
         return{
       status: true,
+      secondStatus: false,
       message: "Hello Vue",
       todo: [
             {task: "host project", date: "05-02-2020", time:"2:00pm", frequency: "daily", status:"todo"},
@@ -132,6 +133,8 @@ export default {
               frequency : "",
               status : "",
         },
+        myTodoToUpdate: null,
+        editArea: null,
         
       }
     },
@@ -168,14 +171,23 @@ export default {
         // this.user.name = id.name;
         // this.user.role = id.role;
 
-        this.status = !this.status;
+        this.status = false;
+        this.secondStatus = true;
         this.user = id;
+        this.myTodoToUpdate = this.todo.indexOf(id)
+        this.todo[this.myTodoToUpdate] = this.user
+      },
+      updateTodo(){
+        this.secondStatus = false;
+        this.status = true;
+        // this.user = ''
       },
       // updateTodo() {
       //    alert('hello');
       // },
       back(){
-        this.status = !this.status; 	
+        this.status = true;
+        this.secondStatus = false;
       }
     }
     
