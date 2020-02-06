@@ -28,11 +28,6 @@
                         <input v-model="user.time" type="text"  class="form-control">    
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label>Frequency</label>
-                        <input v-model="user.frequency" type="text"  class="form-control">    
-                    </div> -->
-
                     <div class="form-group">
                       <label>Frequency</label>
                       <select class="form-control" v-model="user.frequency">
@@ -67,7 +62,8 @@
         </div>
     </div>
      <div  class="col-md-8">
-                    <table class="table border">
+                   <div class="table-responsive">
+                      <table class="table border table table-hover" >
                         <thead>
                           <tr>
                             <th scope="col">S/N</th>  
@@ -90,13 +86,14 @@
                             <td>{{todo.status}}</td>
                             <td>
                                 <button class="btn btn-dark" @click="removeItem(index)">Delete</button>
-                                <button class="btn btn-secondary ml-3" @click="updateItem(todo)">Edit</button>
+                                <button class="btn btn-secondary ml-3" @click="editTodo(todo)">Edit</button>
                                
                             </td>                            
                           </tr>                                                    
                         </tbody>
                       </table>
         </div>
+                   </div>
 
     </div>
 </div>
@@ -167,7 +164,7 @@ export default {
 
         // alert("Delete me");
       },
-      updateItem(id){
+      editTodo(id){
   
         this.status = false;
         this.secondStatus = true;
@@ -180,10 +177,9 @@ export default {
         this.secondStatus = false;
         this.status = true;
         this.user = {}
+        swal("successful!", "Todo updated", "success") 
       },
-      // updateTodo() {
-      //    alert('hello');
-      // },
+
       back(){
         this.status = true;
         this.secondStatus = false;
