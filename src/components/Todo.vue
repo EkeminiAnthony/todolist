@@ -113,8 +113,8 @@
 <script>
 import swal from 'sweetalert';
 export default {
-    data(){
-        return{
+      data(){
+      return{
       status: true,
       secondStatus: false,
       message: "Hello Vue",
@@ -142,7 +142,8 @@ export default {
     methods: {
       addUser(){
         this.todo.push(this.user)
-        swal("waoh!", "your todo is added!", "success");       
+        swal("waoh!", "your todo is added!", "success");  
+        this.user = {}     
       },
       removeItem(index) {        
        
@@ -167,20 +168,18 @@ export default {
         // alert("Delete me");
       },
       updateItem(id){
-        // console.log(id);
-        // this.user.name = id.name;
-        // this.user.role = id.role;
-
+  
         this.status = false;
         this.secondStatus = true;
         this.user = id;
         this.myTodoToUpdate = this.todo.indexOf(id)
-        this.todo[this.myTodoToUpdate] = this.user
+        this.todo[this.myTodoToUpdate] = this.user;
+      
       },
       updateTodo(){
         this.secondStatus = false;
         this.status = true;
-        // this.user = ''
+        this.user = {}
       },
       // updateTodo() {
       //    alert('hello');
